@@ -1,0 +1,43 @@
+<p>Bonjour {{ recipientFirstName }},</p>
+<p>{{ performerFullName }} a attribué un congé à {{ assigneeFullName }}. Les détails du congé :</p>
+<table style="text-align:left">
+    <thead>
+    <tr>
+        <th>Date(s)</th>
+        <th>Durée (Heures)</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for leaveDetail in leaveDetails %}
+        <tr>
+            <td style="padding-right:12px;">{{ leaveDetail['date'] }}</td>
+            <td>{{ leaveDetail['duration'] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p>Type de congé : {{ leaveType }}</p>
+{% if leaveRequestComments %}
+    <p>Commentaires :</p>
+    <table style="text-align:left">
+        <thead>
+        <tr>
+            <th style="padding-right:12px;">Date et Heure</th>
+            <th style="padding-right:12px;">Nom</th>
+            <th>Commentaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for leaveRequestComment in leaveRequestComments %}
+            <tr>
+                <td style="padding-right:12px;">{{ leaveRequestComment['date'] }} {{ leaveRequestComment['time'] }}</td>
+                <td style="padding-right:12px;">{{ leaveRequestComment['name'] }}</td>
+                <td>{{ leaveRequestComment['comment'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+<p>Vous avez reçu cet e-mail car vous êtes désigné comme superviseur de {{ assigneeFullName }}.</p>
+<p>Merci.</p>
+<p>Ceci est une notification automatique.</p>
